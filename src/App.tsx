@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAge } from './hooks';
+import './styles.css'
 
 enum timePassedEnum  {
   DEFAULT = 'Just now',
@@ -13,7 +14,6 @@ function checkTime(time: number, setTheTimeThatPassed: React.Dispatch<React.SetS
     setTheTimeThatPassed(`${Math.floor(time / 60)} minute(s) ago`)
   }
 }
-
 
 function App() {
   const [time, startTime ] = useAge()

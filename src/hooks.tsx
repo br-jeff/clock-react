@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const TEN_SECONDS = 100
+const TEN_SECONDS = 10000
 
 const useAge = (): [number, Function] => {
   let [value, setValue]  = useState(0)
