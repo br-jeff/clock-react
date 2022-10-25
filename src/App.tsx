@@ -1,20 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAge } from './hooks';
 
+enum timePassedEnum  {
+  DEFAULT = 'Just now',
+  FEW_SECONDS = 'A few seconds ago'
+}
+
+function checkTime(time: number, setTheTimeThatPassed: React.Dispatch<React.SetStateAction<string>>) {
+  if(time > 10 && time < 60) {
+    setTheTimeThatPassed(timePassedEnum.FEW_SECONDS)
+  } else if (time > 60) {
+    setTheTimeThatPassed(`${Math.floor(time / 60)} minute(s) ago`)
+  }
+}
+
+
 function App() {
-  /* make whichever changes you deem necessary in this function */
+  const [time, startTime ] = useAge()
+  const [theTimeThatPassed, setTheTimeThatPassed] = useState<string>(timePassedEnum.DEFAULT)
 
-  // you will probably want to call the hook here: const ...  = useAge();
-
-  // you will want to replace the following line
-  const theTimeThatPassed = "???";
+  useEffect(() => checkTime(time, setTheTimeThatPassed),[ time ])
 
   return (
     <div className="App">
       <p>
         Last Updated: {theTimeThatPassed}
       </p>
-      {/* You will need to add a button here */}
+      <button onClick={() => startTime()} > Start Time  </button>
     </div>
   );
 }
